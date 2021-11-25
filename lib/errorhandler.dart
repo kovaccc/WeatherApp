@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:weathearapp/generated/l10n.dart';
 
-@singleton
+// error handler
 class ErrorHandler {
-  static Exception resolveNetworkError(
-      {required Response<dynamic> response,
-      ErrorResolver? customErrorResolver}) {
+  static Exception resolveNetworkError<T>(
+      {required Response<T> response, ErrorResolver? customErrorResolver}) {
     final ErrorResolver errorResolver =
         customErrorResolver ?? DefaultErrorResolver();
     return errorResolver.resolve(response);
@@ -13,26 +12,25 @@ class ErrorHandler {
 
   static String resolveExceptionMessage(Exception error) {
     if (error is BadRequestError) {
-      return "Bad request error";
+      return S.current.badRequest;
     } else if (error is ServerError) {
-      return "server error ${error.message}";
+      return S.current.serverError(error.message);
     } else if (error is NotFoundError) {
-      return "weather not found";
+      return S.current.notFound;
     } else {
-      return "Unknown error";
+      return S.current.unknownError;
     }
   }
 }
 
 // error resolvers
 abstract class ErrorResolver {
-  Exception resolve(Response<dynamic> response);
+  Exception resolve<T>(Response<T> response);
 }
 
 class DefaultErrorResolver implements ErrorResolver {
-
   @override
-  Exception resolve(Response<dynamic> response) {
+  Exception resolve<T>(Response<T> response) {
     final int? statusCode = response.statusCode;
     final String statusMessage = response.statusMessage ?? "";
     if (statusCode != null) {
@@ -41,7 +39,7 @@ class DefaultErrorResolver implements ErrorResolver {
       } else if (statusCode == 400 || statusCode == 423) {
         return const BadRequestError();
       } else if (statusCode == 404) {
-        return const NotFoundError("weather is not found");
+        return const NotFoundError();
       }
     }
     return Exception(response.statusMessage);
@@ -75,3 +73,41 @@ class NotFoundError implements Exception {
   @override
   String toString() => "NotFoundError: $message";
 }
+
+class CancelError implements Exception {
+  final String message;
+
+  const CancelError([this.message = ""]);
+
+  @override
+  String toString() => "CancelError: $message";
+}
+
+class ConnectTimeoutError implements Exception {
+  final String message;
+
+  const ConnectTimeoutError([this.message = ""]);
+
+  @override
+  String toString() => "ConnectTimeoutError: $message";
+}
+
+class SendTimeoutError implements Exception {
+  final String message;
+
+  const SendTimeoutError([this.message = ""]);
+
+  @override
+  String toString() => "SendTimeoutError: $message";
+}
+
+class ReceiveTimeoutError implements Exception {
+  final String message;
+
+  const ReceiveTimeoutError([this.message = ""]);
+
+  @override
+  String toString() => "ReceiveTimeoutError: $message";
+}
+
+

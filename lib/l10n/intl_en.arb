@@ -1,0 +1,12 @@
+{
+  "@@locale": "en",
+  "notFound": "Not found",
+  "serverError": "Server Error {message}",
+  "@serverError": {
+        "placeholders": {
+            "message": {}
+        }
+    },
+  "unknownError": "Unknown error",
+  "badRequest": "Bad request"
+}

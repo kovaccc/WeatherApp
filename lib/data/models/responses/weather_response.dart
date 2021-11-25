@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weathearapp/data/models/main_weather_data.dart';
-import 'package:weathearapp/data/models/weather.dart';
+import 'package:weathearapp/data/models/domain/main_weather_data.dart';
+import 'package:weathearapp/data/models/domain/weather.dart';
 
 part 'weather_response.g.dart';
 

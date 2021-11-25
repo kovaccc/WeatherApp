@@ -1,9 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:weathearapp/data/models/responses/weather_response.dart';
 import 'package:weathearapp/data/network/service/weather_service.dart';
 import 'package:weathearapp/di/injection.dart';
+import 'package:weathearapp/errorhandler.dart';
+import 'package:weathearapp/generated/l10n.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -25,10 +25,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void printWeather() async {
-    final response = await service.getWeather("dasdasvfa");
-    setState(() {
-      _weatherResponse = response;
-    });
+    try{
+      final response = await service.getWeather("dasdasvfa");
+      setState(() {
+        _weatherResponse = response;
+      });
+    } catch(e) {
+      print("${ErrorHandler.resolveExceptionMessage(e as Exception)}");
+    }
+
   }
 
   @override
