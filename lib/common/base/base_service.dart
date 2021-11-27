@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:weathearapp/errorhandler.dart';
+import 'package:weathearapp/util/errorhandler.dart';
 
 class BaseService {
 

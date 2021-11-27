@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weathearapp/data/models/responses/weather_response.dart';
 import 'package:weathearapp/data/network/service/weather_service.dart';
 import 'package:weathearapp/di/injection.dart';
-import 'package:weathearapp/errorhandler.dart';
+import 'package:weathearapp/util/errorhandler.dart';
 import 'package:weathearapp/generated/l10n.dart';
 
 class MyHomePage extends StatefulWidget {

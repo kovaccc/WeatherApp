@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:weathearapp/di/injection.dart';
-import 'package:weathearapp/home_page.dart';
+import 'package:weathearapp/ui/home_page.dart';
 import 'generated/l10n.dart';
 
 void main() {
