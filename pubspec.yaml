@@ -38,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   #State Management
-  flutter_bloc: ^7.3.0
+  flutter_bloc: ^8.0.0
   equatable: ^2.0.3
 
   #Network
@@ -55,6 +55,9 @@ dependencies:
 
   #local storage
   floor: ^1.2.0
+
+  #other
+  flutter_search_bar: ^2.1.0
 
 dev_dependencies:
   flutter_test:

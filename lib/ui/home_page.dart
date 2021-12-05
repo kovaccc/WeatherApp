@@ -1,71 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:weathearapp/data/models/responses/weather_response.dart';
-import 'package:weathearapp/data/network/service/weather_service.dart';
-import 'package:weathearapp/di/injection.dart';
-import 'package:weathearapp/util/errorhandler.dart';
-import 'package:weathearapp/generated/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weathearapp/bloc/weather_bloc.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  final service = getIt.get<WeatherService>();
-  WeatherResponse? _weatherResponse = null;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void printWeather() async {
-    try{
-      final response = await service.getWeather("dasdasvfa");
-      setState(() {
-        _weatherResponse = response;
-      });
-    } catch(e) {
-      print("${ErrorHandler.resolveExceptionMessage(e as Exception)}");
-    }
-
-  }
+class _HomePageState extends State<HomePage> {
+  late SearchBar searchBar;
 
   @override
   void initState() {
-    // TODO: implement initState
+    buildSearchBar();
     super.initState();
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+        title: new Text('Weather App'),
+        actions: [searchBar.getSearchAction(context)]);
+  }
+
+  buildSearchBar() {
+    searchBar = SearchBar(
+      inBar: false,
+      buildDefaultAppBar: buildAppBar,
+      setState: setState,
+      onSubmitted: onCitySubmitted,
+      onCleared: () {},
+      onClosed: () {},
+    );
+  }
+
+  void onCitySubmitted(String cityName) {
+    BlocProvider.of<WeatherBloc>(context).add(WeatherFetch(cityName));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: searchBar.build(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times: ${_weatherResponse?.name.toString()}',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+          children: <Widget>[],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => printWeather(),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

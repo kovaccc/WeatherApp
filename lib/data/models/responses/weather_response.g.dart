@@ -13,11 +13,15 @@ WeatherResponse _$WeatherResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
       name: json['name'] as String,
       main: MainWeatherData.fromJson(json['main'] as Map<String, dynamic>),
+      wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
+      visibility: json['visibility'] as int,
     );
 
 Map<String, dynamic> _$WeatherResponseToJson(WeatherResponse instance) =>
     <String, dynamic>{
       'weather': instance.weather.map((e) => e.toJson()).toList(),
       'main': instance.main.toJson(),
+      'wind': instance.wind.toJson(),
+      'visibility': instance.visibility,
       'name': instance.name,
     };
