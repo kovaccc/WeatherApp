@@ -7,7 +7,7 @@ part of 'wind.dart';
 // **************************************************************************
 
 Wind _$WindFromJson(Map<String, dynamic> json) => Wind(
-      speed: json['speed'] as int,
+      speed: (json['speed'] as num).toDouble(),
       deg: json['deg'] as int,
     );
 

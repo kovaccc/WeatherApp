@@ -4,7 +4,7 @@ part 'wind.g.dart';
 
 @JsonSerializable()
 class Wind {
-  final int speed;
+  final double speed;
   final int deg;
 
   Wind({required this.speed, required this.deg});
