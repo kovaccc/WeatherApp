@@ -7,9 +7,9 @@ import 'package:weathearapp/repositories/weather_repository.dart';
 import 'package:weathearapp/ui/home_page.dart';
 import 'generated/l10n.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
+  await configureDependencies();
   runApp(const MyApp());
 }
 
