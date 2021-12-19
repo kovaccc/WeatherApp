@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:floor/floor.dart';
-import 'package:weathearapp/bloc/weather_bloc.dart';
 import 'package:weathearapp/data/models/domain/weather.dart';
 
 class WeatherConverter extends TypeConverter<List<Weather>, String> {

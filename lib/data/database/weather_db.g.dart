@@ -111,6 +111,32 @@ class _$DBWeatherResponseDao extends DBWeatherResponseDao {
                   'visibility': item.visibility,
                   'name': item.name
                 },
+            changeListener),
+        _dBWeatherResponseUpdateAdapter = UpdateAdapter(
+            database,
+            'DBWeatherResponse',
+            ['id'],
+            (DBWeatherResponse item) => <String, Object?>{
+                  'id': item.id,
+                  'weather': _weatherConverter.encode(item.weather),
+                  'main': _mainWeatherConverter.encode(item.main),
+                  'wind': _windConverter.encode(item.wind),
+                  'visibility': item.visibility,
+                  'name': item.name
+                },
+            changeListener),
+        _dBWeatherResponseDeletionAdapter = DeletionAdapter(
+            database,
+            'DBWeatherResponse',
+            ['id'],
+            (DBWeatherResponse item) => <String, Object?>{
+                  'id': item.id,
+                  'weather': _weatherConverter.encode(item.weather),
+                  'main': _mainWeatherConverter.encode(item.main),
+                  'wind': _windConverter.encode(item.wind),
+                  'visibility': item.visibility,
+                  'name': item.name
+                },
             changeListener);
 
   final sqflite.DatabaseExecutor database;
@@ -120,6 +146,10 @@ class _$DBWeatherResponseDao extends DBWeatherResponseDao {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<DBWeatherResponse> _dBWeatherResponseInsertionAdapter;
+
+  final UpdateAdapter<DBWeatherResponse> _dBWeatherResponseUpdateAdapter;
+
+  final DeletionAdapter<DBWeatherResponse> _dBWeatherResponseDeletionAdapter;
 
   @override
   Future<List<DBWeatherResponse>> getWeathersAsync() async {
@@ -164,10 +194,38 @@ class _$DBWeatherResponseDao extends DBWeatherResponseDao {
   }
 
   @override
-  Future<void> insertWeatherResponse(
-      DBWeatherResponse dbWeatherResponse) async {
+  Future<void> insert(DBWeatherResponse model) async {
     await _dBWeatherResponseInsertionAdapter.insert(
-        dbWeatherResponse, OnConflictStrategy.abort);
+        model, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<List<int>> insertMultiple(List<DBWeatherResponse> models) {
+    return _dBWeatherResponseInsertionAdapter.insertListAndReturnIds(
+        models, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<void> update(DBWeatherResponse model) async {
+    await _dBWeatherResponseUpdateAdapter.update(
+        model, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<int> updateMultiple(List<DBWeatherResponse> models) {
+    return _dBWeatherResponseUpdateAdapter.updateListAndReturnChangedRows(
+        models, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<void> deleteModel(DBWeatherResponse model) async {
+    await _dBWeatherResponseDeletionAdapter.delete(model);
+  }
+
+  @override
+  Future<int> deleteMultiple(List<DBWeatherResponse> models) {
+    return _dBWeatherResponseDeletionAdapter
+        .deleteListAndReturnChangedRows(models);
   }
 }
 

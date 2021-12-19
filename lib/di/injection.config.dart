@@ -21,10 +21,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) async {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final databaseModule = _$DatabaseModule();
+  gh.singleton<_i4.RestClient>(_i4.RestClient.create());
   await gh.singletonAsync<_i5.WeatherDB>(() => databaseModule.database,
       preResolve: true);
   gh.singleton<_i3.DBWeatherResponseDao>(databaseModule.weatherResponseDao);
-  gh.singleton<_i4.RestClient>(_i4.RestClient.create());
   gh.singleton<_i6.WeatherService>(_i6.WeatherService(get<_i4.RestClient>()));
   gh.singleton<_i7.WeatherStorage>(
       _i7.WeatherStorage(get<_i3.DBWeatherResponseDao>()));

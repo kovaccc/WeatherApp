@@ -17,6 +17,14 @@ class WeatherRepository {
     return weather;
   }
 
+  Future<void> getWeathers(List<String> cityNames) async {
+    final List<WeatherResponse> weatherResponses = [];
+    for (var element in cityNames) {
+      weatherResponses.add(await _weatherService.getWeather(element));
+    }
+    await _weatherStorage.saveWeathers(weatherResponses);
+  }
+
   Stream<List<DBWeatherResponse>> getWeathersStream() {
     return _weatherStorage.getWeathersStream();
   }
