@@ -33,6 +33,5 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 }
 
 //TODO add freezed classes
-//TODO make widgets (don't make functions make class widgets)
 //TODO remove search bar add form field and make validator
 //TODO interface for weather from and to json
