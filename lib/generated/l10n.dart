@@ -89,6 +89,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Input required`
+  String get inputRequired {
+    return Intl.message(
+      'Input required',
+      name: 'inputRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Malformed email`
+  String get malformedEmail {
+    return Intl.message(
+      'Malformed email',
+      name: 'malformedEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Too short`
+  String get too_short {
+    return Intl.message(
+      'Too short',
+      name: 'too_short',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown validation`
+  String get unknown_validation {
+    return Intl.message(
+      'Unknown validation',
+      name: 'unknown_validation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You need to be at least eighteen`
+  String get at_least_eighteen {
+    return Intl.message(
+      'You need to be at least eighteen',
+      name: 'at_least_eighteen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid pattern`
+  String get invalid_pattern {
+    return Intl.message(
+      'Invalid pattern',
+      name: 'invalid_pattern',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

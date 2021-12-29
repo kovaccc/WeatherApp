@@ -5,4 +5,6 @@ class Constants {
   static const weatherApiKey = 'bef11ff0625cc3bd7eb442d70397695b';
   static const dbName = 'WeatherDB';
   static const tableWeatherResponse = 'DBWeatherResponse';
+
+  static const eighteenYearsInMs = 568025140000;
 }

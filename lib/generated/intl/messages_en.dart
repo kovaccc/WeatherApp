@@ -24,9 +24,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "at_least_eighteen": MessageLookupByLibrary.simpleMessage(
+            "You need to be at least eighteen"),
         "badRequest": MessageLookupByLibrary.simpleMessage("Bad request"),
+        "inputRequired": MessageLookupByLibrary.simpleMessage("Input required"),
+        "invalid_pattern":
+            MessageLookupByLibrary.simpleMessage("Invalid pattern"),
+        "malformedEmail":
+            MessageLookupByLibrary.simpleMessage("Malformed email"),
         "notFound": MessageLookupByLibrary.simpleMessage("Not found"),
         "serverError": m0,
-        "unknownError": MessageLookupByLibrary.simpleMessage("Unknown error")
+        "too_short": MessageLookupByLibrary.simpleMessage("Too short"),
+        "unknownError": MessageLookupByLibrary.simpleMessage("Unknown error"),
+        "unknown_validation":
+            MessageLookupByLibrary.simpleMessage("Unknown validation")
       };
 }

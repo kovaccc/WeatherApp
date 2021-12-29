@@ -56,8 +56,8 @@ dependencies:
   #local storage
   floor: ^1.2.0
 
-  #other
-  flutter_search_bar: ^2.1.0
+  # validation
+  email_validator: ^2.0.1
 
 dev_dependencies:
   flutter_test:

@@ -23,6 +23,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     try {
       final weatherResponse =
           await weatherRepository.getWeather(event.cityName);
+
       emit(WeatherFetched(weatherResponse));
     } catch (e) {
       if (e is Exception) {

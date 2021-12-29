@@ -1,14 +1,19 @@
 {
-   "@@locale":"en",
-   "notFound":"Not found",
-   "serverError":"Server Error {message}",
-   "@serverError":{
-      "placeholders":{
-         "message":{
-            
-         }
+  "@@locale": "en",
+  "notFound": "Not found",
+  "serverError": "Server Error {message}",
+  "@serverError": {
+    "placeholders": {
+      "message": {
       }
-   },
-   "unknownError":"Unknown error",
-   "badRequest":"Bad request"
+    }
+  },
+  "unknownError": "Unknown error",
+  "badRequest": "Bad request",
+  "inputRequired": "Input required",
+  "malformedEmail": "Malformed email",
+  "too_short": "Too short",
+  "unknown_validation": "Unknown validation",
+  "at_least_eighteen": "You need to be at least eighteen",
+  "invalid_pattern": "Invalid pattern"
 }
