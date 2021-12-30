@@ -91,20 +91,20 @@ class S {
   }
 
   /// `Input required`
-  String get inputRequired {
+  String get input_required {
     return Intl.message(
       'Input required',
-      name: 'inputRequired',
+      name: 'input_required',
       desc: '',
       args: [],
     );
   }
 
   /// `Malformed email`
-  String get malformedEmail {
+  String get malformed_email {
     return Intl.message(
       'Malformed email',
-      name: 'malformedEmail',
+      name: 'malformed_email',
       desc: '',
       args: [],
     );

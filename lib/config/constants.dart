@@ -7,4 +7,5 @@ class Constants {
   static const tableWeatherResponse = 'DBWeatherResponse';
 
   static const eighteenYearsInMs = 568025140000;
+  static const birthDateFormat = "dd/MM/yyyy";
 }

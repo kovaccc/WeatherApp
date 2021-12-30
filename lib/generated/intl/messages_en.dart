@@ -27,10 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "at_least_eighteen": MessageLookupByLibrary.simpleMessage(
             "You need to be at least eighteen"),
         "badRequest": MessageLookupByLibrary.simpleMessage("Bad request"),
-        "inputRequired": MessageLookupByLibrary.simpleMessage("Input required"),
+        "input_required":
+            MessageLookupByLibrary.simpleMessage("Input required"),
         "invalid_pattern":
             MessageLookupByLibrary.simpleMessage("Invalid pattern"),
-        "malformedEmail":
+        "malformed_email":
             MessageLookupByLibrary.simpleMessage("Malformed email"),
         "notFound": MessageLookupByLibrary.simpleMessage("Not found"),
         "serverError": m0,

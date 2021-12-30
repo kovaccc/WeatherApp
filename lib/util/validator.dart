@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:intl/intl.dart';
 import 'package:weathearapp/config/constants.dart';
 import 'package:weathearapp/generated/l10n.dart';
-import 'package:intl/intl.dart';
 
 abstract class Validator {
   static String? validate(String? inputValue, InputType type) {
@@ -22,8 +22,9 @@ abstract class Validator {
           errorMessages.add(validationType.resolveToMessage());
         }
       } else if (validationType is ValidDate) {
-        final dateInMillis =
-            DateFormat('dd/mm/yyyy').parse(inputValue!).millisecondsSinceEpoch;
+        final dateInMillis = DateFormat(Constants.birthDateFormat)
+            .parse(inputValue!)
+            .millisecondsSinceEpoch;
         final currentTime = DateTime.now().millisecondsSinceEpoch;
         if (currentTime - dateInMillis < Constants.eighteenYearsInMs) {
           errorMessages.add(validationType.resolveToMessage());
@@ -39,7 +40,7 @@ abstract class Validator {
 }
 
 // input type to hand over to text field validator
-enum InputType { email, required, birthDate }
+enum InputType { required, email, birthDate }
 
 // define validations which need to be checked for certain InputType
 extension InputTypeExtension on InputType {
@@ -48,7 +49,7 @@ extension InputTypeExtension on InputType {
     if (this == InputType.required) {
       validationTypes = [Required()];
     } else if (this == InputType.email) {
-      validationTypes = [Required(), ValidEmail(), Length(6)];
+      validationTypes = [Required(), ValidEmail()];
     } else if (this == InputType.birthDate) {
       validationTypes = [Required(), ValidDate()];
     } else {
@@ -63,9 +64,9 @@ abstract class ValidationType {
   String resolveToMessage() {
     final String message;
     if (this is Required) {
-      message = S.current.inputRequired;
+      message = S.current.input_required;
     } else if (this is ValidEmail) {
-      message = S.current.malformedEmail;
+      message = S.current.malformed_email;
     } else if (this is Length) {
       message = S.current.too_short;
     } else if (this is ValidDate) {
