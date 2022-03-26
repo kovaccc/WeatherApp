@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:weathearapp/util/errorhandler.dart';
 
 class BaseService {
-
-  Future<T> apiRequest<T>({required apiCall}) async {
+  Future<T> apiRequest<T>(
+      {required apiCall, ErrorResolver? errorResolver}) async {
     try {
       return await apiCall;
     } catch (error) {
@@ -21,7 +21,9 @@ class BaseService {
             case DioErrorType.other:
               throw Exception(error.message);
             case DioErrorType.response:
-              throw ErrorHandler.resolveNetworkError(response: error.response!);
+              throw ErrorHandler.resolveNetworkError(
+                  response: error.response!,
+                  customErrorResolver: errorResolver);
             default:
               throw Exception(error.message);
           }
@@ -29,8 +31,7 @@ class BaseService {
       } catch (e) {
         rethrow;
       }
-      throw Exception();
+      throw Exception(error.toString());
     }
   }
-
 }

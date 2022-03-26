@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weathearapp/bloc/weather_bloc.dart';
+import 'package:weathearapp/blocs/weather_bloc.dart';
 import 'package:weathearapp/data/models/persistence/db_weather_response.dart';
 import 'package:weathearapp/util/validator.dart';
 
@@ -69,7 +69,7 @@ class _WeatherFormState extends State<WeatherForm> {
 
 
   void onCitySubmitted(String cityName) {
-    BlocProvider.of<WeatherBloc>(context).add(WeatherFetch(cityName));
+    BlocProvider.of<WeatherBloc>(context).add(WeatherFetchStarted(cityName));
   }
 
   @override

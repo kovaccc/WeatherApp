@@ -109,5 +109,3 @@ class ReceiveTimeoutError implements Exception {
   @override
   String toString() => "ReceiveTimeoutError: $message";
 }
-
-

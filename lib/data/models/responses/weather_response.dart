@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:json_annotation/json_annotation.dart';
 import 'package:weathearapp/common/base/domain_data.dart';
 import 'package:weathearapp/data/models/domain/main_weather_data.dart';

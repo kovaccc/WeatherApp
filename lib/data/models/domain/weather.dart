@@ -20,8 +20,6 @@ class Weather {
 
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
 
-  //TODO some json helper
   static List<Map<String, dynamic>> listToJson(List<Weather> value) =>
       value.map((e) => e.toJson()).toList();
-
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weathearapp/bloc/weather_bloc.dart';
+import 'package:weathearapp/blocs/weather_bloc.dart';
 import 'package:weathearapp/util/errorhandler.dart';
 
 class WeatherItem extends StatelessWidget {
@@ -13,7 +13,7 @@ class WeatherItem extends StatelessWidget {
         if (state is WeatherLoading) {
           return const CircularProgressIndicator();
         }
-        if (state is WeatherFetched) {
+        if (state is WeatherLoaded) {
           final weatherResponse = state.weatherResponse;
           return Column(
             children: [
