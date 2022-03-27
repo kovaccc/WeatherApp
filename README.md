@@ -25,20 +25,20 @@ The android app lets you:
 ![image](https://user-images.githubusercontent.com/75457058/160285890-2e636208-bf67-42b6-9b7d-5bade82f5054.png)
 ![image](https://user-images.githubusercontent.com/75457058/160286040-f13d87e1-0133-40f1-8832-71e938e47f2f.png)
 
-##Permissions
+## Permissions
 WheatherAppKovacevic requires the following permissions in AndroidManifest.xml:
 
 - Internet permission is used because application code needs Internet access
 
-##Setup
+## Setup
 Clone the repository
 - https://github.com/kovaccc/WeatherApp.git
 
-###Android
+### Android
 - Open the project with your IDE/Code Editor
 - Run it on simulator or real Android device
 
-###iOS
+### iOS
 - Open the project with Xcode
 - Run it on simulator or real iOS device
 - Do not forget to run "pod install" in ios directory to manage library dependencies for your Xcode project before building application on iOS device
