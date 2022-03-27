@@ -27,17 +27,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "at_least_eighteen": MessageLookupByLibrary.simpleMessage(
             "You need to be at least eighteen"),
         "badRequest": MessageLookupByLibrary.simpleMessage("Bad request"),
+        "enter_city": MessageLookupByLibrary.simpleMessage("Enter city"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
         "input_required":
             MessageLookupByLibrary.simpleMessage("Input required"),
         "invalid_pattern":
             MessageLookupByLibrary.simpleMessage("Invalid pattern"),
         "malformed_email":
             MessageLookupByLibrary.simpleMessage("Malformed email"),
+        "no_data": MessageLookupByLibrary.simpleMessage("No data"),
         "notFound": MessageLookupByLibrary.simpleMessage("Not found"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "serverError": m0,
         "too_short": MessageLookupByLibrary.simpleMessage("Too short"),
         "unknownError": MessageLookupByLibrary.simpleMessage("Unknown error"),
         "unknown_validation":
-            MessageLookupByLibrary.simpleMessage("Unknown validation")
+            MessageLookupByLibrary.simpleMessage("Unknown validation"),
+        "weather_app": MessageLookupByLibrary.simpleMessage("Weather app")
       };
 }

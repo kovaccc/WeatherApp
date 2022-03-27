@@ -149,6 +149,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weather app`
+  String get weather_app {
+    return Intl.message(
+      'Weather app',
+      name: 'weather_app',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message(
+      'Error',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get ok {
+    return Intl.message(
+      'Ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data`
+  String get no_data {
+    return Intl.message(
+      'No data',
+      name: 'no_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter city`
+  String get enter_city {
+    return Intl.message(
+      'Enter city',
+      name: 'enter_city',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
