@@ -26,7 +26,7 @@ The flutter app lets you:
 ![image](https://user-images.githubusercontent.com/75457058/160286040-f13d87e1-0133-40f1-8832-71e938e47f2f.png)
 
 ## Permissions
-WheatherApp requires the following permissions in AndroidManifest.xml:
+WeatherApp requires the following permissions in AndroidManifest.xml:
 
 - Internet permission is used because application code needs Internet access
 
