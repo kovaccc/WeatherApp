@@ -5,7 +5,7 @@ WeatherApp is Flutter application that enables viewing forecasts of cities all o
 Flutter project that has it's own communication with Weather API. The API is based on the REST architecture and it is using Retrofit with GET method to get response from service. The results retrieved are structured in a JSON transport format. Fetched data is saved locally so the use of the application is enabled even without an internet connection.
 
 ## Features
-The android app lets you:
+The flutter app lets you:
 
 - Search for the city for which you want to view the forecast
 - Get weather from REST API
@@ -26,7 +26,7 @@ The android app lets you:
 ![image](https://user-images.githubusercontent.com/75457058/160286040-f13d87e1-0133-40f1-8832-71e938e47f2f.png)
 
 ## Permissions
-WheatherAppKovacevic requires the following permissions in AndroidManifest.xml:
+WheatherApp requires the following permissions in AndroidManifest.xml:
 
 - Internet permission is used because application code needs Internet access
 
