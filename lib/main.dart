@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:weathearapp/bloc/weather_bloc.dart';
+import 'package:weathearapp/blocs/weather_bloc.dart';
 import 'package:weathearapp/di/injection.dart';
 import 'package:weathearapp/repositories/weather_repository.dart';
 import 'package:weathearapp/ui/home_page.dart';

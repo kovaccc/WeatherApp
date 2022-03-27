@@ -30,7 +30,6 @@ class WeatherRepository {
   }
 
   Future<List<DBWeatherResponse>> getWeathersAsync() async {
-    final dbWeatherResponses = await _weatherStorage.getWeathersAsync();
-    return dbWeatherResponses;
+    return await _weatherStorage.getWeathersAsync();
   }
 }

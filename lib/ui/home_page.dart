@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weathearapp/bloc/weather_bloc.dart';
+import 'package:weathearapp/blocs/weather_bloc.dart';
 import 'package:weathearapp/data/models/persistence/db_weather_response.dart';
-import 'package:weathearapp/util/validator.dart';
+import 'package:weathearapp/generated/l10n.dart';
+import 'package:weathearapp/ui/widgets/error_dialog.dart';
+import 'package:weathearapp/ui/widgets/loading_overlay.dart';
+import 'package:weathearapp/ui/widgets/weather_form.dart';
+import 'package:weathearapp/ui/widgets/weather_item.dart';
+
+import '../util/errorhandler.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -13,103 +19,60 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-
+  final LoadingOverlay _loadingOverlay = LoadingOverlay();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: const Text('Weather App')),
-      body: Column(
-        children: [
-          const WeatherForm(),
-          SizedBox(width: 200, height: 200,),
-          StreamBuilder<List<DBWeatherResponse>>(
-            stream: BlocProvider.of<WeatherBloc>(context).weathers,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return Expanded(
-                child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      DBWeatherResponse weatherResponse = snapshot.data[index];
-                      return Text(weatherResponse.name);
-                    }),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-
-class WeatherForm extends StatefulWidget {
-  const WeatherForm({Key? key}) : super(key: key);
-
-  @override
-  _WeatherFormState createState() => _WeatherFormState();
-
-}
-
-class _WeatherFormState extends State<WeatherForm> {
-
-  final _formKey = GlobalKey<FormState>();
-  final cityFieldController = TextEditingController();
-
-
-  void onCitySubmitted(String cityName) {
-    BlocProvider.of<WeatherBloc>(context).add(WeatherFetch(cityName));
-  }
-
-  @override
-  void dispose() {
-    cityFieldController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextFormField(
-            controller: cityFieldController,
-            validator: (value) {
-             return Validator.validate(value, InputType.birthDate);
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-
-                  onCitySubmitted(cityFieldController.text);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Processing Data ${cityFieldController.text}')),
+    return BlocListener<WeatherBloc, WeatherState>(
+      listenWhen: (previousState, state) {
+        return previousState is WeatherLoading || state is WeatherLoading;
+      },
+      listener: (context, state) {
+        if (state is WeatherLoading) {
+          _loadingOverlay.show(context);
+        } else {
+          _loadingOverlay.hide();
+          if (state is WeatherError) {
+            showErrorDialog(
+              context,
+              S.of(context).error,
+              ErrorHandler.resolveExceptionMessage(state.error),
+            );
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(title: Text(S.of(context).weather_app)),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const WeatherForm(),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              StreamBuilder<List<DBWeatherResponse>>(
+                stream: BlocProvider.of<WeatherBloc>(context).weathers,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(child: Text(S.of(context).no_data));
+                  }
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        DBWeatherResponse weatherResponse =
+                            snapshot.data[index];
+                        return WeatherItem(weatherResponse: weatherResponse);
+                      },
+                    ),
                   );
-                }
-              },
-              child: const Text('Submit'),
-            ),
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
-
-

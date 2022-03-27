@@ -6,12 +6,12 @@ import 'package:weathearapp/di/injection.dart';
 
 @module
 abstract class DatabaseModule {
-
   @preResolve
   @singleton
-  Future<WeatherDB> get database => $FloorWeatherDB.databaseBuilder(Constants.dbName).build();
+  Future<WeatherDB> get database =>
+      $FloorWeatherDB.databaseBuilder(Constants.dbName).build();
 
   @singleton
-  DBWeatherResponseDao get weatherResponseDao => getIt<WeatherDB>().weatherResponseDao;
-
+  DBWeatherResponseDao get weatherResponseDao =>
+      getIt<WeatherDB>().weatherResponseDao;
 }

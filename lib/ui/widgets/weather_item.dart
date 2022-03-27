@@ -1,65 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weathearapp/bloc/weather_bloc.dart';
-import 'package:weathearapp/util/errorhandler.dart';
+import 'package:weathearapp/common/resources/icons.dart';
+import 'package:weathearapp/data/models/persistence/db_weather_response.dart';
 
 class WeatherItem extends StatelessWidget {
-  const WeatherItem({Key? key}) : super(key: key);
+  const WeatherItem({Key? key, required this.weatherResponse})
+      : super(key: key);
+  final DBWeatherResponse weatherResponse;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
-        if (state is WeatherLoading) {
-          return const CircularProgressIndicator();
-        }
-        if (state is WeatherFetched) {
-          final weatherResponse = state.weatherResponse;
-          return Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("${weatherResponse.main.temp}"),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                      "Feels like ${weatherResponse.main.feels_like.toInt()}F."),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child:
-                    Text("${weatherResponse.weather.first.description}."),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  weatherResponse.name,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.blueAccent,
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("${weatherResponse.main.pressure}hPa"),
-                  Text("Humidity: ${weatherResponse.main.humidity}%"),
-                ],
-              ),
-              Row(
-                textDirection: TextDirection.ltr,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Visibility: ${weatherResponse.visibility / 1000}km",
-                    textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image(
+                  image: AssetImage(
+                    getWeatherImageFromDescription(
+                        weatherResponse.weather[0].description),
                   ),
-                ],
-              ),
-            ],
-          );
-        }
-        if (state is WeatherError) {
-          return Text(ErrorHandler.resolveExceptionMessage(state.error));
-        }
-        return const Text('Something went wrong!');
-      }),
+                  fit: BoxFit.fitWidth,
+                  width: 50,
+                  height: 50,
+                ),
+                const SizedBox(width: 50),
+                Text("${weatherResponse.main.temp}K")
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(weatherResponse.weather[0].description),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text("${weatherResponse.wind.speed}m/s"),
+                const SizedBox(width: 20),
+                Text("${weatherResponse.main.pressure}hPa"),
+                const SizedBox(width: 20),
+                Text("Humidity: ${weatherResponse.main.humidity}%"),
+              ],
+            ),
+          ],
+        ),
+      ),
       elevation: 8,
       shadowColor: Colors.blue,
       margin: const EdgeInsets.all(20),
@@ -68,22 +71,22 @@ class WeatherItem extends StatelessWidget {
           borderSide: const BorderSide(color: Colors.white)),
     );
   }
+}
 
-  String getWeatherImageResource(String description) {
-    final String image;
-    if (description.contains("clear")) {
-      image = 'assets/icons8_sun_48.png';
-    } else if (description.contains("rain")) {
-      image = 'assets/icons8_rain_48.png';
-    } else if (description.contains("few clouds")) {
-      image = 'assets/icons8_sun_behind_small_cloud_48.png';
-    } else if (description.contains("snow")) {
-      image = 'assets/icons8_snow_48.png';
-    } else if (description.contains("cloud")) {
-      image = 'assets/icons8_cloud_48.png';
-    } else {
-      image = 'assets/icons8_sun_48.png';
-    }
-    return image;
+String getWeatherImageFromDescription(String description) {
+  final String imagePath;
+  if (description.contains("clear")) {
+    imagePath = WeatherIcons.sun;
+  } else if (description.contains("rain")) {
+    imagePath = WeatherIcons.rain;
+  } else if (description.contains("few clouds")) {
+    imagePath = WeatherIcons.sunBehindCloud;
+  } else if (description.contains("snow")) {
+    imagePath = WeatherIcons.snow;
+  } else if (description.contains("cloud")) {
+    imagePath = WeatherIcons.cloud;
+  } else {
+    imagePath = WeatherIcons.sun;
   }
+  return imagePath;
 }

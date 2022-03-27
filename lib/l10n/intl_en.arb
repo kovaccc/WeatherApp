@@ -15,5 +15,11 @@
   "too_short": "Too short",
   "unknown_validation": "Unknown validation",
   "at_least_eighteen": "You need to be at least eighteen",
-  "invalid_pattern": "Invalid pattern"
+  "invalid_pattern": "Invalid pattern",
+  "search": "Search",
+  "weather_app": "Weather app",
+  "error": "Error",
+  "ok": "Ok",
+  "no_data": "No data",
+  "enter_city": "Enter city"
 }

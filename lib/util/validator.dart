@@ -5,7 +5,7 @@ import 'package:weathearapp/generated/l10n.dart';
 
 abstract class Validator {
   static String? validate(String? inputValue, InputType type) {
-    List<String> errorMessages = [];
+    List<String?> errorMessages = [];
 
     for (var validationType in type.getValidationTypes()) {
       if (validationType is Required) {
@@ -52,8 +52,6 @@ extension InputTypeExtension on InputType {
       validationTypes = [Required(), ValidEmail()];
     } else if (this == InputType.birthDate) {
       validationTypes = [Required(), ValidDate()];
-    } else {
-      validationTypes = [Required()];
     }
     return validationTypes;
   }
@@ -61,8 +59,8 @@ extension InputTypeExtension on InputType {
 
 // all validation types which are checked in validator
 abstract class ValidationType {
-  String resolveToMessage() {
-    final String message;
+  String? resolveToMessage() {
+    final String? message;
     if (this is Required) {
       message = S.current.input_required;
     } else if (this is ValidEmail) {
@@ -74,7 +72,7 @@ abstract class ValidationType {
     } else if (this is Regex) {
       message = S.current.invalid_pattern;
     } else {
-      message = S.current.unknown_validation;
+      message = null;
     }
     return message;
   }
